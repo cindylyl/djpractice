@@ -1,0 +1,182 @@
+{% extends "base.html" %}
+
+{% block mainbody %}
+<div class="ui attached stackable menu">
+  <div class="ui container">
+    <a class="item">
+      <i class="home icon"></i> Home
+    </a>
+    <a class="item" href="http://127.0.0.1:8000/report">
+      <i class="grid layout icon"></i> Produce report
+    </a>
+    <a class="item" href="http://127.0.0.1:8000/admin">
+      <i class="edit icon"></i> Manage DB
+    </a>
+
+    <div class="right item">
+      <div class="ui input"><input type="text" placeholder="Search..."></div>
+    </div>
+  </div>
+</div>
+
+    <div class="ui vertical very padded segment">
+    <div class="ui grid">
+  <div class="row">
+    <div class="three wide column">
+    </div>
+    <div class="ten wide column">
+
+        <form action="/report/" method="get">
+            <label>First Name</label>
+            <input type="text" name="stu_fname">
+            <label>Last Name</label>
+            <input type="text" name="stu_lname">
+            <input type="submit" value="Search">
+        </form>
+
+        <form class="ui form" action="/report/" method="get">
+          <h2 class="ui dividing header">Report Filter</h2>
+          <div class="field">
+            <label>Name</label>
+            <div class="two fields">
+              <div class="field">
+                <input type="text" name="stu_fname" placeholder="First Name">
+              </div>
+              <div class="field">
+                <input type="text" name="stu_lname" placeholder="Last Name">
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Date Range</label>
+            <div class="fields">
+              <div class="eight wide field">
+                <input type="text" name="shipping[address]" placeholder="DD-MM-YYYY">
+              </div>
+                TO
+                <div class="eight wide field">
+                <input type="text" name="shipping[address]" placeholder="DD-MM-YYYY">
+              </div>
+            </div>
+          </div>
+
+          <div class="two fields">
+            <div class="field">
+              <label>Belt Color</label>
+              <select class="ui fluid dropdown">
+                <option value="">Color</option>
+                <option value="White">white</option>
+                <option value="Yellow">yellow</option>
+                <option value="Black">black</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Country</label>
+              <div class="ui fluid search selection dropdown">
+                <input type="hidden" name="country">
+                <i class="dropdown icon"></i>
+                <div class="default text">Select Country</div>
+                <div class="menu">
+            <div class="item">Afghanistan</div>
+            <div class="item">Aland Islands</div>
+
+          </div>
+               </div>
+            </div>
+          </div>
+          <h4 class="ui dividing header">Billing Information</h4>
+          <div class="field">
+            <label>Card Type</label>
+            <div class="ui selection dropdown">
+              <input type="hidden" name="card[type]">
+              <div class="default text">Type</div>
+              <i class="dropdown icon"></i>
+              <div class="menu">
+                <div class="item" data-value="visa">
+                  Visa
+                </div>
+                <div class="item" data-value="amex">
+                  American Express
+                </div>
+                <div class="item" data-value="discover">
+                  Discover
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="fields">
+            <div class="seven wide field">
+              <label>Card Number</label>
+              <input type="text" name="card[number]" maxlength="16" placeholder="Card #">
+            </div>
+
+            <div class="ten wide field">
+              <label>Day of the week</label>
+              <div class="two fields">
+                <div class="field">
+                  <select class="ui fluid search dropdown" name="card[expire-month]">
+                    <option value=""></option>
+                    <option value="1">Monday</option>
+                    <option value="2">Tuesday</option>
+                    <option value="3">Wednesday</option>
+                    <option value="4">Thursday</option>
+                    <option value="5">Friday</option>
+                    <option value="6">Saturday</option>
+                    <option value="7">Sunday</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <input type="text" name="card[expire-year]" maxlength="4" placeholder="Year">
+                </div>
+              </div>
+            </div>
+          </div>
+
+              <div class="inline fields">
+            <label for="fruit">Belt color:</label>
+            <div class="field">
+              <div class="ui radio checkbox">
+                <input type="radio" name="fruit" checked="" tabindex="0" class="hidden">
+                <label>White</label>
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui radio checkbox">
+                <input type="radio" name="fruit" tabindex="0" class="hidden">
+                <label>Yellow</label>
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui radio checkbox">
+                <input type="radio" name="fruit" tabindex="0" class="hidden">
+                <label>Black</label>
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui radio checkbox">
+                <input type="radio" name="fruit" tabindex="0" class="hidden">
+                <label>Grapefruit</label>
+              </div>
+            </div>
+          </div>
+          <input type="submit" value="Search">
+        </form>
+
+    </div>
+    <div class="three wide column">
+    </div>
+  </div>
+    </div>
+    </div>
+
+    <script>
+    $('select.dropdown')
+  .dropdown();
+    $('.ui.radio.checkbox')
+  .checkbox();
+
+    </script>
+
+
+{% endblock %}

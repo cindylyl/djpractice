@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Base Page</title>
+    <link rel="stylesheet" href="{% static 'css/semantic.css' %}">
+    <link rel="stylesheet" href="{% static 'css/my.css' %}">
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/semantic.js' %}"></script>
+</head>
+<body>
+<p>
+    <div class="ui center aligned header">
+    <h1>Stephanos Kung Fu Club</h1>
+</div>
+</p>
+
+
+
+
+
+{% block mainbody %}
+<p>original</p>
+{% endblock %}
+
+
+</body>
+</html>
