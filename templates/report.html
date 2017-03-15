@@ -22,43 +22,114 @@
     <div class="ui vertical very padded segment">
     <div class="ui grid">
   <div class="row">
-    <div class="three wide column">
+    <div class="two wide column">
     </div>
-    <div class="ten wide column">
-
+    <div class="twelve wide column">
+    <p>Current Student</p>
     <table class="ui celled table">
-  <thead>
-    <tr><th>First Name</th>
-    <th>Last Name</th>
-    <th>Join Date</th>
-  </tr>
-  </thead>
-  <tbody>
-  {% for stu in student_list %}
-    <tr>
-      <td>{{ stu.stu_fname }}</td>
-      <td>{{ stu.stu_lname }}</td>
-      <td>{{ stu.stu_join_date }}</td>
-    </tr>
-  {% endfor %}
-  </tbody>
-  <tfoot>
-    <tr><th colspan="3">
-      <div class="ui right floated pagination menu">
-        <a class="icon item">
-          <i class="left chevron icon"></i>
-        </a>
-        <a class="item">1</a>
-        <a class="item">2</a>
-        <a class="item">3</a>
-        <a class="item">4</a>
-        <a class="icon item">
-          <i class="right chevron icon"></i>
-        </a>
-      </div>
-    </th>
-  </tr></tfoot>
- </table>
+      <thead>
+        <tr><th>First Name</th>
+        <th>Last Name</th>
+        <th>Birthday</th>
+        <th>Join Date</th>
+        <th>Email</th>
+        <th>Cell phone</th>
+        <th>Address</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for stu in active_students %}
+        <tr>
+          <td>{{ stu.stu_fname }}</td>
+          <td>{{ stu.stu_lname }}</td>
+          <td>{{ stu.stu_birth_date }}</td>
+          <td>{{ stu.stu_join_date }}</td>
+          <td>{{ stu.stu_email }}</td>
+          <td>{{ stu.stu_phone }}</td>
+          <td>{{ stu.stu_address }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+      <tfoot>
+        <tr><th colspan="7">
+          <div class="ui right floated pagination menu">
+            <a class="icon item">
+              <i class="left chevron icon"></i>
+            </a>
+            <a class="item">1</a>
+            <a class="item">2</a>
+            <a class="item">3</a>
+            <a class="item">4</a>
+            <a class="icon item">
+              <i class="right chevron icon"></i>
+            </a>
+          </div>
+        </th>
+      </tr></tfoot>
+     </table>
+
+    <p>Filtered Students</p>
+    <table class="ui celled table">
+      <thead>
+        <tr><th>First Name</th>
+        <th>Last Name</th>
+        <th>Birthday</th>
+        <th>Join Date</th>
+        <th>Email</th>
+        <th>Cell phone</th>
+        <th>Address</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for stu in student_list %}
+        <tr>
+          <td>{{ stu.stu_fname }}</td>
+          <td>{{ stu.stu_lname }}</td>
+          <td>{{ stu.stu_birth_date }}</td>
+          <td>{{ stu.stu_join_date }}</td>
+          <td>{{ stu.stu_email }}</td>
+          <td>{{ stu.stu_phone }}</td>
+          <td>{{ stu.stu_address }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+      <tfoot>
+        <tr><th colspan="7">
+          <div class="ui right floated pagination menu">
+            <a class="icon item">
+              <i class="left chevron icon"></i>
+            </a>
+            <a class="item">1</a>
+            <a class="item">2</a>
+            <a class="item">3</a>
+            <a class="item">4</a>
+            <a class="icon item">
+              <i class="right chevron icon"></i>
+            </a>
+          </div>
+        </th>
+      </tr></tfoot>
+     </table>
+
+    <p>Filtered Invoice</p>
+    <table class="ui celled table">
+      <thead>
+        <tr><th>Invoice ID</th>
+        <th>Invoice Date</th>
+        <th>Invoice Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for inv in invoice_list %}
+        <tr>
+          <td>{{ inv.inv_id }}</td>
+          <td>{{ inv.inv_date }}</td>
+          <td>{{ inv.inv_info }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+     </table>
+
 {#        {% for stu in student_list %}#}
 {#        <ul>#}
 {#            <li>{{ stu.stu_fname }}</li>#}
@@ -68,7 +139,7 @@
 {#        </ul>#}
 {#        {% endfor %}#}
     </div>
-    <div class="three wide column">
+    <div class="two wide column">
     </div>
   </div>
     </div>

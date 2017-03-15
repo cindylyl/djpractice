@@ -29,13 +29,13 @@
         <form action="/report/" method="get">
             <label>First Name</label>
             <input type="text" name="stu_fname">
-            <label>Last Name</label>
-            <input type="text" name="stu_lname">
+            <label>Join Date</label>
+            <input type="text" name="stu_join_date">
             <input type="submit" value="Search">
         </form>
 
         <form class="ui form" action="/report/" method="get">
-          <h2 class="ui dividing header">Report Filter</h2>
+          <h3 class="ui dividing header">Student Filter</h3>
           <div class="field">
             <label>Name</label>
             <div class="two fields">
@@ -49,14 +49,14 @@
           </div>
 
           <div class="field">
-            <label>Date Range</label>
+            <label>Join Date Range</label>
             <div class="fields">
               <div class="eight wide field">
-                <input type="text" name="shipping[address]" placeholder="DD-MM-YYYY">
+                <input type="text" name="join_date1" placeholder="YYYY-MM-DD">
               </div>
                 TO
                 <div class="eight wide field">
-                <input type="text" name="shipping[address]" placeholder="DD-MM-YYYY">
+                <input type="text" name="join_date2" placeholder="YYYY-MM-DD">
               </div>
             </div>
           </div>
@@ -64,58 +64,39 @@
           <div class="two fields">
             <div class="field">
               <label>Belt Color</label>
-              <select class="ui fluid dropdown">
+              <select multiple="" class="ui fluid dropdown" name="belt_color">
                 <option value="">Color</option>
                 <option value="White">white</option>
                 <option value="Yellow">yellow</option>
                 <option value="Black">black</option>
               </select>
             </div>
-            <div class="field">
-              <label>Country</label>
-              <div class="ui fluid search selection dropdown">
-                <input type="hidden" name="country">
-                <i class="dropdown icon"></i>
-                <div class="default text">Select Country</div>
-                <div class="menu">
-            <div class="item">Afghanistan</div>
-            <div class="item">Aland Islands</div>
-
+{#            <div class="field">#}
+{#              <label>Country</label>#}
+{#              <div class="ui fluid search selection dropdown">#}
+{#                <input type="hidden" name="country">#}
+{#                <i class="dropdown icon"></i>#}
+{#                <div class="default text">Select Country</div>#}
+{#                <div class="menu">#}
+{#            <div class="item">Afghanistan</div>#}
+{#            <div class="item">Aland Islands</div>#}
+{##}
+{#          </div>#}
+{#               </div>#}
+{#            </div>#}
           </div>
-               </div>
-            </div>
-          </div>
-          <h4 class="ui dividing header">Billing Information</h4>
-          <div class="field">
-            <label>Card Type</label>
-            <div class="ui selection dropdown">
-              <input type="hidden" name="card[type]">
-              <div class="default text">Type</div>
-              <i class="dropdown icon"></i>
-              <div class="menu">
-                <div class="item" data-value="visa">
-                  Visa
-                </div>
-                <div class="item" data-value="amex">
-                  American Express
-                </div>
-                <div class="item" data-value="discover">
-                  Discover
-                </div>
-              </div>
-            </div>
-          </div>
+          <h3 class="ui dividing header">Meeting Filter</h3>
           <div class="fields">
             <div class="seven wide field">
               <label>Card Number</label>
-              <input type="text" name="card[number]" maxlength="16" placeholder="Card #">
+              <input type="text" name="card_number" maxlength="16" placeholder="Card #">
             </div>
 
             <div class="ten wide field">
               <label>Day of the week</label>
               <div class="two fields">
                 <div class="field">
-                  <select class="ui fluid search dropdown" name="card[expire-month]">
+                  <select class="ui fluid search dropdown" name="day_of_the_week">
                     <option value=""></option>
                     <option value="1">Monday</option>
                     <option value="2">Tuesday</option>
@@ -127,39 +108,56 @@
                   </select>
                 </div>
                 <div class="field">
-                  <input type="text" name="card[expire-year]" maxlength="4" placeholder="Year">
+                  <input type="text" name="year" maxlength="4" placeholder="Year">
                 </div>
               </div>
             </div>
           </div>
 
-              <div class="inline fields">
-            <label for="fruit">Belt color:</label>
-            <div class="field">
-              <div class="ui radio checkbox">
-                <input type="radio" name="fruit" checked="" tabindex="0" class="hidden">
-                <label>White</label>
-              </div>
+           <h3 class="ui dividing header">Invoice Filter</h3>
+          <div class="fields">
+            <div class="seven wide field">
+              <label>Card Number</label>
+              <input type="text" name="card_number" maxlength="16" placeholder="Card #">
             </div>
-            <div class="field">
-              <div class="ui radio checkbox">
-                <input type="radio" name="fruit" tabindex="0" class="hidden">
-                <label>Yellow</label>
-              </div>
-            </div>
-            <div class="field">
-              <div class="ui radio checkbox">
-                <input type="radio" name="fruit" tabindex="0" class="hidden">
-                <label>Black</label>
-              </div>
-            </div>
-            <div class="field">
-              <div class="ui radio checkbox">
-                <input type="radio" name="fruit" tabindex="0" class="hidden">
-                <label>Grapefruit</label>
+
+            <div class="ten wide field">
+              <label>Invoice Date Range</label>
+              <div class="two fields">
+                <div class="field">
+                 <input type="text" name="inv_date1" placeholder="YYYY-MM-DD">
+                </div>
+                <div class="field">
+                  <input type="text" name="inv_date2" placeholder="YYYY-MM-DD">
+                </div>
               </div>
             </div>
           </div>
+
+
+{#              <div class="inline fields">#}
+{#            <label>Belt color:</label>#}
+{#            <div class="field">#}
+{#              <div class="ui checkbox">#}
+{#                <input type="checkbox" name="fruit" checked="" class="hidden" value="White">#}
+{#                <label>White</label>#}
+{#              </div>#}
+{#            </div>#}
+{#            <div class="field">#}
+{#              <div class="ui checkbox">#}
+{#                <input type="checkbox" name="belt_color" class="hidden" value="Yellow">#}
+{#                <label>Yellow</label>#}
+{#              </div>#}
+{#            </div>#}
+{#            <div class="field">#}
+{#              <div class="ui checkbox">#}
+{#                <input type="checkbox" name="belt_color" class="hidden" value="Black">#}
+{#                <label>Black</label>#}
+{#              </div>#}
+{#            </div>#}
+{#          </div>#}
+
+
           <input type="submit" value="Search">
         </form>
 
@@ -173,7 +171,7 @@
     <script>
     $('select.dropdown')
   .dropdown();
-    $('.ui.radio.checkbox')
+    $('.ui.checkbox')
   .checkbox();
 
     </script>
