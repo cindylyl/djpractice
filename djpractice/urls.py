@@ -17,14 +17,14 @@ from django.conf.urls import url
 from django.contrib import admin
 #from djpractice.view import hello
 # import hello function from views
-from TestModel.views import hello,profile,edit_profile,signup,login,report,report_filter
+from TestModel.views import profile,edit_profile,signup,login,report,report_filter,hello
 from TestModel.testdb import testdb
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^hello/$', hello),
     url(r'^testdb/$', testdb),
-    url(r'^profile/$', profile),
+    url(r'^profile/(?P<stu_id>\d+)/$', profile,name='profile'),
     url(r'^edit/$', edit_profile),
     url(r'^login/$', login),
     url(r'^signup/$', signup),

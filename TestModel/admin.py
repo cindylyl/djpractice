@@ -42,7 +42,10 @@ class ClassAdmin(admin.ModelAdmin):
 class GainAdmin(admin.ModelAdmin):
     list_display = ('stu_id','rank_id','gain_date')
 
-admin.site.register(User)
+class userAdmin(admin.ModelAdmin):
+    list_display = ('username','password','stu_id')
+
+admin.site.register(User, userAdmin)
 admin.site.register(Student, StuAdmin)
 admin.site.register(Students, StusAdmin)
 admin.site.register(Instructor, InsAdmin)

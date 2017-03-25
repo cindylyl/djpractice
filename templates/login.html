@@ -8,20 +8,25 @@
     </div>
     <div class="ten wide column">
 
-        <form class="ui form">
-      <div class="field">
-        <label>User name</label>
-        <input type="text" name="username" >
-      </div>
-      <div class="field">
-        <label>Password</label>
-        <input type="password" name="password">
-      </div>
-      <button class="ui button" type="submit">Submit</button>
-            <div class="ui clear button">Clear</div>
-            <div class="ui error message"></div>
-            <a class="item" href="http://127.0.0.1:8000/signup">You don't have an account? Sign up, please.</a>
-    </form>
+        <form class="ui form" action="/login/" method="post">
+            {% csrf_token %}
+          <div class="field">
+            <label>User name</label>
+            <input type="text" name="username" >
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <input type="password" name="password">
+          </div>
+          <button class="ui button" type="submit">Submit</button>
+                <div class="ui clear button">Clear</div>
+                <div class="ui error message"></div>
+                <a class="item" href="http://127.0.0.1:8000/signup">You don't have an account? Sign up, please.</a>
+       </form>
+
+
+        <p>{{ error_message }}</p>
+
 
     </div>
     <div class="three wide column">
@@ -30,36 +35,36 @@
     </div>
     </div>
 
-    <script>
-    $("form").form('clear');
-
-    $('form')
-    .form({
-    fields: {
-      username: {
-        identifier: 'username',
-        rules: [
-          {
-            type   : 'empty',
-            prompt : 'Please enter a username'
-          }
-        ]
-      },
-        password: {
-        identifier: 'password',
-        rules: [
-          {
-            type   : 'empty',
-            prompt : 'Please enter a password'
-          },
-          {
-            type   : 'minLength[6]',
-            prompt : 'Your password must be at least {ruleValue} characters'
-          }
-        ]
-      }
-    }
-  });
-    </script>
+{#    <script>#}
+{#    $("form").form('clear');#}
+{##}
+{#    $('form')#}
+{#    .form({#}
+{#    fields: {#}
+{#      username: {#}
+{#        identifier: 'username',#}
+{#        rules: [#}
+{#          {#}
+{#            type   : 'empty',#}
+{#            prompt : 'Please enter a username'#}
+{#          }#}
+{#        ]#}
+{#      },#}
+{#        password: {#}
+{#        identifier: 'password',#}
+{#        rules: [#}
+{#          {#}
+{#            type   : 'empty',#}
+{#            prompt : 'Please enter a password'#}
+{#          },#}
+{#          {#}
+{#            type   : 'minLength[6]',#}
+{#            prompt : 'Your password must be at least {ruleValue} characters'#}
+{#          }#}
+{#        ]#}
+{#      }#}
+{#    }#}
+{#  });#}
+{#    </script>#}
 
 {% endblock %}

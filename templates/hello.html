@@ -12,7 +12,15 @@
 {% extends "base.html" %}
 
 {% block mainbody %}
-    <h2>{{ hello }}</h2>
+
+    <form action="/hello/" method="post">
+        {% csrf_token %}
+        <input type="text" name="q">
+        <input type="submit" value="Submit">
+    </form>
+
+    <p>{{ rlt }}</p>
+{#    <h2>{{ hello }}</h2>#}
     <p>extended base.html !</p>
 
     <div class="ui center aligned container">

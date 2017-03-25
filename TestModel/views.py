@@ -1,24 +1,77 @@
-from django.shortcuts import render,render_to_response
-from .models import Student,Students,Gain,Rank,Invoice
+from django.shortcuts import render,render_to_response,get_object_or_404
+from django.http import HttpResponseRedirect
+from .models import Student,Students,Gain,Rank,Invoice,User
 from django.db.models import Q
+from datetime import date
+from django.core.urlresolvers import reverse
 
 # Create your views here.
-def hello(request):
-    context = {}
-    context['hello'] = 'hello, lovely cindy! '
-    return render(request, 'hello.html', context)
 
-def profile(request):
-    return render(request, "profile.html")
+def hello(request):
+    ctx = {}
+    if request.POST:
+        ctx['rlt'] = request.POST['q']
+    return render(request, "hello.html", ctx)
+    #return render(request, 'hello.html', context)
+
+def profile(request,stu_id):
+    stu = get_object_or_404(Students, pk=stu_id)
+    return render(request, "profile.html", {'stu': stu})
 
 def edit_profile(request):
     return render(request, "edit.html")
 
 def signup(request):
-    return render(request, 'signup.html')
+    ctx={}
+    if request.POST:
+        # get input value
+        username = request.POST['username']
+        password = request.POST['password']
+        firstname = request.POST['fname']
+        lastname = request.POST['lname']
+        birth_y = int(request.POST['birthday_y'])
+        birth_m = int(request.POST['birthday_m'])
+        birth_d = int(request.POST['birthday_d'])
+        joindate_y = int(request.POST['joindate_y'])
+        joindate_m = int(request.POST['joindate_m'])
+        joindate_d = int(request.POST['joindate_d'])
+        phone = request.POST['phone']
+        email = request.POST['email']
+        address = request.POST['address']
+
+        # insert input to database
+        stu = Students(stu_fname=firstname, stu_lname=lastname, stu_birth_date=date(birth_y, birth_m, birth_d),
+                       stu_join_date=date(joindate_y, joindate_m, joindate_d), stu_phone=phone, stu_email=email,
+                       stu_address=address)
+        stu.save()
+        print(stu.stu_id)
+        user = User(username=username,password=password,stu_id=stu)
+        user.save()
+
+        # return message
+        ctx['rlt']="sign up successfully"
+    return render(request, 'signup.html',ctx)
+
 
 def login(request):
-    return render(request, 'login.html')
+    message = {}
+    if request.POST:
+        username = request.POST['username']
+        password = request.POST['password']
+        #usr = Students.objects.filter(user__password=password,user__username=username)
+        usr = User.objects.filter(username=username,password=password)
+
+        if len(usr) == 1:
+            stu_id = usr.values()[0]['stu_id_id']
+            #print(stu_id)
+            #message['id']=stu_id
+            return HttpResponseRedirect(reverse('profile',args=(stu_id,)))
+        else:
+            message['error_message']="incorrect username or password"
+            #return render(request, 'login.html',{'error_message':"username or password is incorrect"})
+
+    return render(request, 'login.html', message)
+
 
 def report_filter(request):
     return render_to_response('report_filter.html')
@@ -39,7 +92,7 @@ def report(request):
     #     'student_list': student_list
     # }
 
-    result_list={}
+    #result_list={}
     active_students = Students.objects.all()
     student_list = Students.objects.all()
     invoice_list = Invoice.objects.all()
