@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 
 {% block mainbody %}
-<div class="ui attached stackable menu">
+    <div class="ui sticky">
+<div class="ui inverted attached stackable menu">
   <div class="ui container">
-    <a class="item">
+    <a class="item" href="http://127.0.0.1:8000/hello">
       <i class="home icon"></i> Home
     </a>
-    <a class="item" href="http://127.0.0.1:8000/profile">
-      <i class="grid layout icon"></i> My Profile
+    <a class="item" href="http://127.0.0.1:8000/login">
+      <i class="grid layout icon"></i> Log out
     </a>
     <a class="item" href="http://127.0.0.1:8000/edit">
       <i class="edit icon"></i> Edit Profile
@@ -26,8 +27,9 @@
     </div>
   </div>
 </div>
+    </div>
 
-    <div class="ui vertical very padded segment">
+    <div id="mycontent" class="ui vertical very padded segment">
     <div class="ui grid">
   <div class="row">
     <div class="three wide column">
@@ -42,5 +44,11 @@
     </div>
     </div>
 
+    <script>
+        $('.ui.sticky')
+            .sticky({
+        context: '#mycontent'
+        });
+    </script>
 
 {% endblock %}

@@ -29,7 +29,7 @@ class Instructor(models.Model):
 class Class(models.Model):
     class_id = models.AutoField(primary_key=True)
     class_time = models.TimeField('class time',default=time(10,0,0))
-    class_dayOfTheWeek = models.IntegerField()
+    class_dayOfTheWeek = models.CharField(max_length=20)
     class_level = models.CharField(max_length=20)
     class_location = models.CharField(max_length=20)
     ins_id = models.ForeignKey(Instructor)

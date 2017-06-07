@@ -7,7 +7,9 @@
     <div class="three wide column">
     </div>
     <div class="ten wide column">
-
+        <h2>Log in</h2>
+        <p>{{ signin_success }}</p>
+        <div class="ui divider"></div>
         <form class="ui form" action="/login/" method="post">
             {% csrf_token %}
           <div class="field">
@@ -18,10 +20,10 @@
             <label>Password</label>
             <input type="password" name="password">
           </div>
-          <button class="ui button" type="submit">Submit</button>
-                <div class="ui clear button">Clear</div>
+          <div style="text-align: center"><button class="ui button" type="submit">Submit</button></div>
+{#                <div class="ui clear button">Clear</div>#}
                 <div class="ui error message"></div>
-                <a class="item" href="http://127.0.0.1:8000/signup">You don't have an account? Sign up, please.</a>
+                <div style="text-align: center"><a class="item" href="http://127.0.0.1:8000/signup">You don't have an account? Sign up, please.</a></div>
        </form>
 
 

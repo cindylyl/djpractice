@@ -1,134 +1,45 @@
-{#<!DOCTYPE html>#}
-{#<html lang="en">#}
-{#<head>#}
-{#    <meta charset="UTF-8">#}
-{#    <title>Hello</title>#}
-{#</head>#}
-{#<body>#}
-{#<h2>{{ hello }}</h2>#}
-{#</body>#}
-{#</html>#}
-
 {% extends "base.html" %}
 
 {% block mainbody %}
 
-    <form action="/hello/" method="post">
-        {% csrf_token %}
-        <input type="text" name="q">
-        <input type="submit" value="Submit">
-    </form>
-
-    <p>{{ rlt }}</p>
-{#    <h2>{{ hello }}</h2>#}
-    <p>extended base.html !</p>
-
-    <div class="ui center aligned container">
-    </div>
-
-    <div class="ui center aligned container">
-    </div>
-
-<div class="ui grid">
-  <div class="row">
-    <div class="three wide column">
-    </div>
-    <div class="ten wide column">
-      <table class="ui celled table">
-  <thead>
-    <tr><th>Header</th>
-    <th>Header</th>
-    <th>Header</th>
-  </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        cell
-      </td>
-      <td>Cell</td>
-      <td>Cell</td>
-    </tr>
-    <tr>
-      <td>Cell</td>
-      <td>Cell</td>
-      <td>Cell</td>
-    </tr>
-    <tr>
-      <td>Cell</td>
-      <td>Cell</td>
-      <td>Cell</td>
-    </tr>
-  </tbody>
-  <tfoot>
-    <tr><th colspan="3">
-      <div class="ui right floated pagination menu">
-        <a class="icon item">
-          <i class="left chevron icon"></i>
-        </a>
-        <a class="item">1</a>
-        <a class="item">2</a>
-        <a class="item">3</a>
-        <a class="item">4</a>
-        <a class="icon item">
-          <i class="right chevron icon"></i>
-        </a>
-      </div>
-    </th>
-  </tr></tfoot>
- </table>
-    </div>
-    <div class="three wide column">
+    <div class="ui inverted attached stackable menu">
+  <div class="ui container">
+    <a class="item" href="http://127.0.0.1:8000/signup">
+      <i class="home icon"></i> Sign up
+    </a>
+    <a class="item" href="http://127.0.0.1:8000/login">
+      <i class="grid layout icon"></i> Log in
+    </a>
+    <a class="item" href="http://127.0.0.1:8000/admin">
+      <i class="edit icon"></i> Manage Database
+    </a>
+      <a class="item" href="http://127.0.0.1:8000/report_filter">
+      <i class="edit icon"></i> Report Filter
+    </a>
+{#    <div class="ui simple dropdown item">#}
+{#      More#}
+{#      <i class="dropdown icon"></i>#}
+{#      <div class="menu">#}
+{#        <a class="item" href="http://127.0.0.1:8000/login"><i class="edit icon"></i> Log out</a>#}
+{#        <a class="item"><i class="globe icon"></i> Choose Language</a>#}
+{#        <a class="item"><i class="settings icon"></i> Account Settings</a>#}
+{#      </div>#}
+{#    </div>#}
+    <div class="right item">
+      <div class="ui input"><input type="text" placeholder="Search..."></div>
     </div>
   </div>
+</div>
+
+
+    <div class="three wide column">
+    </div>
+
   <div class="row">
     <div class="three wide column">
     </div>
     <div class="ten wide column">
-      <table class="ui celled striped table">
-  <thead>
-    <tr><th colspan="3">
-      Git Repository
-    </th>
-  </tr></thead>
-  <tbody>
-    <tr>
-      <td class="collapsing">
-        <i class="folder icon"></i> node_modules
-      </td>
-      <td>Initial commit</td>
-      <td class="right aligned collapsing">10 hours ago</td>
-    </tr>
-    <tr>
-      <td>
-        <i class="folder icon"></i> test
-      </td>
-      <td>Initial commit</td>
-      <td class="right aligned">10 hours ago</td>
-    </tr>
-    <tr>
-      <td>
-        <i class="folder icon"></i> build
-      </td>
-      <td>Initial commit</td>
-      <td class="right aligned">10 hours ago</td>
-    </tr>
-    <tr>
-      <td>
-        <i class="file outline icon"></i> package.json
-      </td>
-      <td>Initial commit</td>
-      <td class="right aligned">10 hours ago</td>
-    </tr>
-    <tr>
-      <td>
-        <i class="file outline icon"></i> Gruntfile.js
-      </td>
-      <td>Initial commit</td>
-      <td class="right aligned">10 hours ago</td>
-    </tr>
-  </tbody>
-</table>
+
     </div>
     <div class="three wide column">
     </div>
@@ -136,9 +47,9 @@
 </div>
 
     <div class="ui raised very padded text container segment">
-  <h2 class="ui header">Dogs Roles with Humans</h2>
-  <p></p>
-  <p></p>
+  <h2 class="ui header">Introduction</h2>
+        <br><br>
+  Welcome to Stephanos Kung Fu Club!
 </div>
 
 {% endblock %}

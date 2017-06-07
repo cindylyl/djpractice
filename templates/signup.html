@@ -8,6 +8,8 @@
     <div class="three wide column">
     </div>
     <div class="ten wide column">
+        <h2>Sign up</h2>
+        <div class="ui divider"></div>
     <form class="ui form" action="/signup/" method="post">
         {% csrf_token %}
         <div class="field">
@@ -38,18 +40,7 @@
             <input type="text" name="birthday_d" placeholder="DD">
         </div>
   </div>
-    <div class="three fields">
-    <label>Join Date</label>
-        <div class="field">
-            <input type="text" name="joindate_y" placeholder="YYYY">
-        </div>
-        <div class="field">
-            <input type="text" name="joindate_m" placeholder="MM">
-        </div>
-        <div class="field">
-            <input type="text" name="joindate_d" placeholder="DD">
-        </div>
-  </div>
+
         <div class="field">
     <label>Phone Number</label>
     <input type="text" name="phone">

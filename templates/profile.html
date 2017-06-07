@@ -2,16 +2,53 @@
 
 {% block pf %}
 
-    <div class="ui huge list">
+    <div class="ui relaxed divided list">
+
       <div class="item">
+          <div>Student Name:</div>
         {{ stu.stu_fname }} {{ stu.stu_lname }}
       </div>
+
       <div class="item">
+          <div>Join Date:</div>
         {{ stu.stu_join_date }}
       </div>
+
       <div class="item">
+          <div>Birthday:</div>
         {{ stu.stu_birth_date }}
       </div>
+
+        <div class="item">
+            <div>Phone Number:</div>
+            {{ stu.stu_phone }}
+        </div>
+
+        <div class="item">
+            <div>Email:</div>
+            {{ stu.stu_email }}
+        </div>
+
+        <div class="item">
+            <div>Address:</div>
+            {{ stu.stu_address }}
+        </div>
+        <div class="item">
+            <div>Instructor:</div>
+            {{ stu.ins_id.ins_name }}
+        </div>
+        <div class="item">
+            <div>Meeting:</div>
+            {{ stu.meeting_id.meeting_date }}
+        </div>
+        <div class="item">
+            <div>Rank Information:</div>
+            {% for r in rank %}
+                {{ r.rank_name }} {{ r.rank_belt_color }}
+                <br>
+            {% endfor %}
+        </div>
+
     </div>
 
 {% endblock %}

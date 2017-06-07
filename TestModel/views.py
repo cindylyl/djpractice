@@ -1,9 +1,10 @@
-from django.shortcuts import render,render_to_response,get_object_or_404
+from django.shortcuts import render,render_to_response,get_object_or_404,redirect
 from django.http import HttpResponseRedirect
 from .models import Student,Students,Gain,Rank,Invoice,User
 from django.db.models import Q
 from datetime import date
 from django.core.urlresolvers import reverse
+from django.contrib import messages
 
 # Create your views here.
 
@@ -16,7 +17,9 @@ def hello(request):
 
 def profile(request,stu_id):
     stu = get_object_or_404(Students, pk=stu_id)
-    return render(request, "profile.html", {'stu': stu})
+    rank = Rank.objects.filter(gain__stu_id=stu)
+    print(rank)
+    return render(request, "profile.html", {'stu': stu, 'rank': rank})
 
 def edit_profile(request):
     return render(request, "edit.html")
@@ -32,29 +35,39 @@ def signup(request):
         birth_y = int(request.POST['birthday_y'])
         birth_m = int(request.POST['birthday_m'])
         birth_d = int(request.POST['birthday_d'])
-        joindate_y = int(request.POST['joindate_y'])
-        joindate_m = int(request.POST['joindate_m'])
-        joindate_d = int(request.POST['joindate_d'])
+        # joindate_y = int(request.POST['joindate_y'])
+        # joindate_m = int(request.POST['joindate_m'])
+        # joindate_d = int(request.POST['joindate_d'])
         phone = request.POST['phone']
         email = request.POST['email']
         address = request.POST['address']
 
         # insert input to database
         stu = Students(stu_fname=firstname, stu_lname=lastname, stu_birth_date=date(birth_y, birth_m, birth_d),
-                       stu_join_date=date(joindate_y, joindate_m, joindate_d), stu_phone=phone, stu_email=email,
+                       stu_join_date=date.today(), stu_phone=phone, stu_email=email,
                        stu_address=address)
         stu.save()
         print(stu.stu_id)
         user = User(username=username,password=password,stu_id=stu)
         user.save()
+        gain = Gain(stu_id=stu,gain_date=date.today(),rank_id=Rank.objects.get(rank_id=5001))
+        gain.save()
 
         # return message
+        messages.add_message(request, messages.INFO, "sign up successfully, please log in...")
         ctx['rlt']="sign up successfully"
+        return redirect('/login/')
     return render(request, 'signup.html',ctx)
 
 
 def login(request):
     message = {}
+    storage = messages.get_messages(request)
+
+    for m in storage:
+        message['signin_success'] = m
+        break
+
     if request.POST:
         username = request.POST['username']
         password = request.POST['password']
@@ -65,10 +78,12 @@ def login(request):
             stu_id = usr.values()[0]['stu_id_id']
             #print(stu_id)
             #message['id']=stu_id
-            return HttpResponseRedirect(reverse('profile',args=(stu_id,)))
+            #return redirect(reverse('profile',args=(stu_id,)))
+            return redirect('/profile/{}'.format(stu_id))
+            #return HttpResponseRedirect(reverse('profile',args=(stu_id,)))
+
         else:
             message['error_message']="incorrect username or password"
-            #return render(request, 'login.html',{'error_message':"username or password is incorrect"})
 
     return render(request, 'login.html', message)
 
@@ -96,12 +111,11 @@ def report(request):
     active_students = Students.objects.all()
     student_list = Students.objects.all()
     invoice_list = Invoice.objects.all()
+    gain_list = Gain.objects.all()
+
     belt_color =[]
     condition = []
-    #object_list = Students.objects.filter(gain__rank_id__rank_belt_color='Yellow')
-    # print(object_list)
-    # for item in object_list:
-    #     print(item.stu_fname,item.stu_join_date)
+
     for k in request.GET:
         message = request.GET[k]
         if message is not '':
@@ -117,21 +131,29 @@ def report(request):
                 student_list = student_list.filter(stu_join_date__lte=message)
             elif k == 'belt_color':
                 belt_color.append(message)
+            elif k == 'day_of_the_week':
+                student_list = student_list.filter(meeting_id__class_id__class_dayOfTheWeek=message)
             elif k == 'inv_date1':
                 invoice_list = invoice_list.filter(inv_date__gte=message)
             elif k== 'inv_date2':
                 invoice_list = invoice_list.filter(inv_date__lte=message)
+            elif k== 'inv_info':
+                invoice_list = invoice_list.filter(inv_info=message)
     if len(belt_color)==1:
         student_list = student_list.filter(gain__rank_id__rank_belt_color=belt_color[0])
+        gain_list = gain_list.filter(rank_id__rank_belt_color=belt_color[0])
     elif len(belt_color)==2:
         student_list = student_list.filter(Q(gain__rank_id__rank_belt_color=belt_color[0]) |
                                            Q(gain__rank_id__rank_belt_color=belt_color[1]))
-    print(student_list.values())
-    print(invoice_list.values())
+        gain_list = gain_list.filter(Q(rank_id__rank_belt_color=belt_color[0]) |
+                                     Q(rank_id__rank_belt_color=belt_color[1]))
+
+
 
     context = {
         'student_list':student_list,
         'active_students': active_students,
-        'invoice_list': invoice_list
+        'invoice_list': invoice_list,
+        'gain_list': gain_list
     }
     return render(request,'report.html',context)

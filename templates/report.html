@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 
 {% block mainbody %}
-<div class="ui attached stackable menu">
+    <div class="ui sticky">
+<div class="ui inverted attached stackable menu">
   <div class="ui container">
-    <a class="item">
+    <a class="item" href="http://127.0.0.1:8000/hello">
       <i class="home icon"></i> Home
     </a>
     <a class="item" href="http://127.0.0.1:8000/report_filter">
@@ -18,13 +19,16 @@
     </div>
   </div>
 </div>
+</div>
 
-    <div class="ui vertical very padded segment">
+    <div id ='results' class="ui vertical very padded segment">
     <div class="ui grid">
   <div class="row">
-    <div class="two wide column">
+    <div class="one wide column">
     </div>
-    <div class="twelve wide column">
+    <div class="fourteen wide column">
+    <h2>Report</h2>
+    <br><br>
     <p>Current Student</p>
     <table class="ui celled table">
       <thead>
@@ -35,6 +39,8 @@
         <th>Email</th>
         <th>Cell phone</th>
         <th>Address</th>
+            <th>Instructor</th>
+            <th>Meeting</th>
       </tr>
       </thead>
       <tbody>
@@ -47,11 +53,13 @@
           <td>{{ stu.stu_email }}</td>
           <td>{{ stu.stu_phone }}</td>
           <td>{{ stu.stu_address }}</td>
+        <td>{{ stu.ins_id.ins_name }}</td>
+        <td>{{ stu.meeting_id.meeting_date }}</td>
         </tr>
       {% endfor %}
       </tbody>
       <tfoot>
-        <tr><th colspan="7">
+        <tr><th colspan="9">
           <div class="ui right floated pagination menu">
             <a class="icon item">
               <i class="left chevron icon"></i>
@@ -71,25 +79,23 @@
     <p>Filtered Students</p>
     <table class="ui celled table">
       <thead>
-        <tr><th>First Name</th>
-        <th>Last Name</th>
+        <tr><th>Name</th>
         <th>Birthday</th>
         <th>Join Date</th>
-        <th>Email</th>
-        <th>Cell phone</th>
-        <th>Address</th>
+         <th>Instructor</th>
+        <th>Meeting Date</th>
+        <th>Class</th>
       </tr>
       </thead>
       <tbody>
       {% for stu in student_list %}
         <tr>
-          <td>{{ stu.stu_fname }}</td>
-          <td>{{ stu.stu_lname }}</td>
+          <td>{{ stu.stu_fname }} {{ stu.stu_lname }}</td>
           <td>{{ stu.stu_birth_date }}</td>
           <td>{{ stu.stu_join_date }}</td>
-          <td>{{ stu.stu_email }}</td>
-          <td>{{ stu.stu_phone }}</td>
-          <td>{{ stu.stu_address }}</td>
+        <td>{{ stu.ins_id.ins_name }}</td>
+        <td>{{ stu.meeting_id.meeting_date }}</td>
+        <td>{{ stu.meeting_id.class_id.class_time }} <br> {{ stu.meeting_id.class_id.class_dayOfTheWeek }}</td>
         </tr>
       {% endfor %}
       </tbody>
@@ -111,12 +117,28 @@
       </tr></tfoot>
      </table>
 
+
+    </div>
+    <div class="one wide column">
+    </div>
+  </div>
+    </div>
+    </div>
+
+    <div class="ui vertical very padded segment">
+    <div class="ui grid">
+  <div class="row">
+    <div class="three wide column">
+    </div>
+    <div class="ten wide column">
+
     <p>Filtered Invoice</p>
     <table class="ui celled table">
       <thead>
         <tr><th>Invoice ID</th>
         <th>Invoice Date</th>
         <th>Invoice Description</th>
+            <th>Student Name</th>
       </tr>
       </thead>
       <tbody>
@@ -125,25 +147,48 @@
           <td>{{ inv.inv_id }}</td>
           <td>{{ inv.inv_date }}</td>
           <td>{{ inv.inv_info }}</td>
+          <td>{{ inv.stu_id.stu_fname }}  {{ inv.stu_id.stu_lname }}</td>
         </tr>
       {% endfor %}
       </tbody>
      </table>
 
-{#        {% for stu in student_list %}#}
-{#        <ul>#}
-{#            <li>{{ stu.stu_fname }}</li>#}
-{#        </ul>#}
-{#        <ul>#}
-{#            <li>{{ stu.stu_lname }}</li>#}
-{#        </ul>#}
-{#        {% endfor %}#}
+    <p>Filtered Ranking</p>
+    <table class="ui celled table">
+      <thead>
+
+        <th>Rank Name</th>
+        <th>Belt Color</th>
+            <th>Gain Date</th>
+            <th>Student Name</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for gain in gain_list %}
+        <tr>
+
+          <td>{{ gain.rank_id.rank_name }}</td>
+          <td>{{ gain.rank_id.rank_belt_color }}</td>
+          <td>{{ gain.gain_date }} </td>
+          <td>{{ gain.stu_id.stu_fname }} {{ gain.stu_id.stu_lname }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+     </table>
+
     </div>
-    <div class="two wide column">
+    <div class="three wide column">
     </div>
   </div>
     </div>
     </div>
+
+    <script>
+        $('.ui.sticky')
+            .sticky({
+        context: '#results'
+        });
+    </script>
 
 
 {% endblock %}
