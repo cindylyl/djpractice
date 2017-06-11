@@ -16,18 +16,27 @@ Including another URLconf
 from django.conf.urls import url,include
 from django.contrib import admin
 #from djpractice.view import hello
-from TestModel.views import edit_profile,signup,login,report,report_filter,hello
+from TestModel import views
 from TestModel.testdb import testdb
+from rest_framework import routers
+
+
+router = routers.DefaultRouter()
+router.register(r'users', views.UserViewSet)
+# router.register(r'groups', views.GroupViewSet)
+router.register(r'students',views.StudentViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^hello/$', hello),
+    url(r'^hello/$', views.hello),
     url(r'^testdb/$', testdb),
     #url(r'^profile/(?P<stu_id>\d+)/$', profile,name='profile'),
     url(r'^profile/', include('TestModel.urls',namespace='profile')),
-    url(r'^edit/', edit_profile),
-    url(r'^login/', login, name='login'),
-    url(r'^signup/', signup),
-    url(r'^report/', report),
-    url(r'^report_filter/',report_filter)
+    url(r'^edit/', views.edit_profile),
+    url(r'^login/', views.login, name='login'),
+    url(r'^signup/', views.signup),
+    url(r'^report/', views.report),
+    url(r'^report_filter/',views.report_filter),
+    url(r'^', include(router.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
