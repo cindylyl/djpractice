@@ -1,5 +1,6 @@
+from datetime import date, time
+
 from django.db import models
-from datetime import date,time
 
 
 # Create your models here.

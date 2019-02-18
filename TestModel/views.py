@@ -1,14 +1,12 @@
-from django.shortcuts import render,render_to_response,get_object_or_404,redirect
-from django.http import HttpResponseRedirect
-from .models import Student,Students,Gain,Rank,Invoice,User
-from django.db.models import Q
 from datetime import date
-from django.core.urlresolvers import reverse
-from django.contrib import messages
 
+from django.contrib import messages
+from django.db.models import Q
+from django.shortcuts import render, render_to_response, get_object_or_404, redirect
 # from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
-from rest_framework.decorators import detail_route
+
+from .models import Students, Gain, Rank, Invoice, User
 from .serializers import UserSerializer, StudentSerializer
 
 
@@ -21,14 +19,17 @@ def hello(request):
     return render(request, "hello.html", ctx)
     #return render(request, 'hello.html', context)
 
+
 def profile(request,stu_id):
     stu = get_object_or_404(Students, pk=stu_id)
     rank = Rank.objects.filter(gain__stu_id=stu)
     print(rank)
     return render(request, "profile.html", {'stu': stu, 'rank': rank})
 
+
 def edit_profile(request):
     return render(request, "edit.html")
+
 
 def signup(request):
     ctx={}
@@ -96,6 +97,7 @@ def login(request):
 
 def report_filter(request):
     return render_to_response('report_filter.html')
+
 
 def report(request):
     request.encoding = 'utf-8'

@@ -1,6 +1,7 @@
-from django.contrib.auth.models import User, Group
-from .models import Students
+from django.contrib.auth.models import User
 from rest_framework import serializers
+
+from .models import Students
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
