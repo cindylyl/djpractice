@@ -3,7 +3,6 @@ from datetime import date, time
 from django.db import models
 
 
-# Create your models here.
 class Testing(models.Model):
     def __str__(self):
         return self.t_name
